@@ -135,5 +135,8 @@ Steam Deck (SteamOS 3.8.16、ネイティブ実行) の動作を確認済みで�
 | AppImage | 未実装。同じフォルダに `AppRun` を足して `appimagetool` で固める予定 (`.desktop` とアイコンは生成済み) |
 | Flatpak (Flathub) | 未定。AppStream メタデータ (`metainfo.xml`) とマニフェストが要る |
 
-xp3 アーカイブの作成 (データの固め) もまだありません。`archive/` に置いた `*.xp3` を
-取り込む `assetPack` のエントリはサンプルに入っています。
+xp3 アーカイブは krkrz_android と同じく **案件側で事前に作って取り込みます**
+(このリポジトリでは作りません)。作った `*.xp3` を `archive/` に置けば、サンプルの
+`assetPack` の `flatten` エントリでパッケージ直下に入ります (`data.xp3` は自動検出)。
+暗号化などを含む案件独自のツールがあればそれを使います。暗号化なしの通常の xp3 を作る
+共通 CLI は krkrz_dev 側で用意する予定です (krkrz_dev の TODO.md)。
