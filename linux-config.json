@@ -1,0 +1,69 @@
+{
+    "comment": "サンプル案件: krkrz_dev のコアデモ (src/core/data) を Linux アプリとしてパッケージする",
+
+    "name": "krkrz Sample",
+    "version": "1.0.0",
+    "exeName": "krkrz-sample",
+    "orgName": "wamsoft",
+    "appName": "krkrz-sample",
+
+    "cmake": {
+        "buildType": "Release",
+        "options": {
+            "KRKRZ_USE_SJIS": "YES"
+        },
+        "pluginFolders": [
+            "${KRKRZ_BASE}/krkrz_dev/src/plugins"
+        ],
+        "plugins": [
+            "KAGParserEx", "clipfile", "csvParser", "getSample", "json",
+            "layerExAreaAverage", "layerExBTOA", "layerExImage", "layerExLongExposure",
+            "layerExRaster", "layerExVector", "lineParser", "minizip", "psdfile",
+            "saveStruct", "scriptsEx", "shrinkCopy", "krkr_richtext", "extrans",
+            "extNagano", "AlphaMovie", "expat", "layerExSave", "sigcheck",
+            "krkreffekseer", "krkrthreepp"
+        ],
+        "staticPlugins": []
+    },
+
+    "config": {
+        "comment": "<exeName>.cf に書く追加オプション (先頭の - を除いた名前: 値)。orgname / appname は上の orgName / appName から自動で入る。例 {\"loglevel\": \"warning\"}",
+        "options": {}
+    },
+
+    "desktop": {
+        "id": "jp.wamsoft.krkrz.sample",
+        "comment": "Kirikiri Z core demo",
+        "categories": "Game;",
+        "icon": "resource/icon.svg"
+    },
+
+    "assetPack": {
+        "baseFolder": "${PROJECT_DIR}",
+        "sources": [
+            {
+                "comment": "案件側の上書き用ファイル (先勝ち)",
+                "type": "mirror",
+                "from": "overlay",
+                "to": ""
+            },
+            {
+                "comment": "ゲームデータ。パッケージ直下の data/startup.tjs が自動検出される",
+                "type": "mirror",
+                "from": "${KRKRZ_BASE}/krkrz_dev/src/core/data",
+                "to": "data",
+                "exclude": ["**/*.bak", "**/*.psd"]
+            },
+            {
+                "comment": "xp3 アーカイブを置く場合 (data.xp3 は自動検出される)",
+                "type": "flatten",
+                "from": "archive",
+                "include": ["*.xp3"]
+            }
+        ]
+    },
+
+    "package": {
+        "formats": ["dir", "tar"]
+    }
+}
