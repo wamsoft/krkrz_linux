@@ -15,6 +15,11 @@ krkrz_web / krkrz_ios と同じく、エンジンは `KRKRZ_BASE` 経由で
 - 出力は「そのまま動くフォルダ」と、それを固めた tar.gz です。Steam のデポ、
   itch.io、GOG などはこのフォルダをそのまま使えます
 
+配布形式の考え方・RPATH・セーブデータの場所・Steam Deck での確認手順などの解説は
+krkrz_dev のドキュメント
+[Linux 版の配布パッケージ](https://wamsoft.github.io/krkrz_dev/topics/core/linux_package/)
+にあります (ソースは krkrz_dev の `doc/topics/core/linux_package.md`)。
+
 ## 必要なもの
 
 | 要件 | 備考 |
@@ -101,8 +106,21 @@ Linux 版 krkrz の既定のデータ保存場所は **`~/.local/share/<orgname>
 `<exeName>.cf` に入り、作品ごとのフォルダになります。実行ファイルの隣には書かないので、
 読み取り専用の場所 (AppImage、Flatpak、`/opt` など) に置いても動きます。
 
-**Steam Cloud** を使う場合は、Steamworks の Auto-Cloud 設定でルートを
-「Linux Home」相当の `~/.local/share/<orgname>/<appname>/` に合わせてください。
+**Steam Cloud** を使う場合は、Steamworks の Auto-Cloud で Linux のルートを
+`LinuxXdgDataHome` (= `~/.local/share`)、サブディレクトリを `<orgname>/<appname>` に
+してください。
+
+この既定は krkrz_dev 2026-10 の変更です (以前は実行ファイルの隣の `savedata`)。
+旧既定のセーブが実行ファイルの隣に残っていると、起動ログに移行を促す警告が出ます。
+
+## Steam Deck で確かめる
+
+出力フォルダは [steamdev](https://github.com/wamsoft/steamdev) でそのまま Deck に送れます。
+
+```bash
+steamdev -d <deck> deploy --gameid krkrz-sample_linux \
+    --dir build/linux/package/krkrz-sample --command "./krkrz-sample" --start
+```
 
 ## 配布形式の今後
 
