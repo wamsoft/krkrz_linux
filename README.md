@@ -118,9 +118,14 @@ Linux 版 krkrz の既定のデータ保存場所は **`~/.local/share/<orgname>
 出力フォルダは [steamdev](https://github.com/wamsoft/steamdev) でそのまま Deck に送れます。
 
 ```bash
-steamdev -d <deck> deploy --gameid krkrz-sample_linux \
+steamdev -d <deck> deploy --gameid krkrz_sample \
     --dir build/linux/package/krkrz-sample --command "./krkrz-sample" --start
 ```
+
+gameid は英数字・`_`・`.` だけです (ハイフン不可)。2026-10-06 にサンプル案件で
+Steam Deck (SteamOS 3.8.16、ネイティブ実行) の動作を確認済みです
+(`-demotest` で全 24 シーン ok、同梱 SDL3 が読まれ、保存場所は
+`/home/deck/.local/share/wamsoft/krkrz-sample/`)。
 
 ## 配布形式の今後
 
